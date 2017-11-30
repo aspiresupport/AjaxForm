@@ -93,31 +93,46 @@ var AjaxForm = {
 
 //noinspection JSUnusedGlobalSymbols
 AjaxForm.Message = {
-    success: function (message, sticky) {
-        if (message) {
-            if (!sticky) {
-                sticky = false;
-            }
-            $.jGrowl(message, {theme: 'af-message-success', sticky: sticky});
-        }
-    },
-    error: function (message, sticky) {
-        if (message) {
-            if (!sticky) {
-                sticky = false;
-            }
-            $.jGrowl(message, {theme: 'af-message-error', sticky: sticky});
-        }
-    },
-    info: function (message, sticky) {
-        if (message) {
-            if (!sticky) {
-                sticky = false;
-            }
-            $.jGrowl(message, {theme: 'af-message-info', sticky: sticky});
-        }
-    },
-    close: function () {
-        $.jGrowl('close');
-    },
+	// success: function(message, sticky) {
+	// 	if (message) {
+	// 		if (!sticky) {sticky = false;}
+	// 		$.jGrowl(message, {theme: 'af-message-success', sticky: sticky});
+	// 	}
+	// }
+	success: function(message, sticky) {
+    if (message) {
+    //     if (!sticky) {sticky = false;}
+    if (!sticky) {sticky = true;}
+      //$.jGrowl(message, {theme: 'af-message-success', sticky: sticky});
+      //DS - Amended here, couldn't get it to work on the front end.
+      if ($('body').hasClass('campaign')) {
+        //$.jGrowl(message, {theme: 'af-message-success', sticky: sticky });
+        $('#form-response').html('<div style="background-color: #95db95;border-radius: 12px;padding: 12px;margin:12px 0;"><h3 style="font-size:1rem">Thanks!</h3><p style="margin-bottom:0">Click <a href="https://www.redfaireinternational.com/circlek-story.pdf" target="_blank" rel="noopener noreferrer">here to access</a> the Circle K case study.</p><p style="margin-bottom:0">You will also receive a copy in your inbox shortly.</p></div>')
+      }
+      else {
+        $.jGrowl(message, {theme: 'af-message-success', sticky: sticky});
+      }
+    }
+  }
+  ,error: function(message, sticky) {
+		if (message) {
+			if (!sticky) {sticky = false;}
+			
+			if ($('body').hasClass('campaign')) {
+			
+			}
+      else {
+        	$.jGrowl(message, {theme: 'af-message-error', sticky: sticky});
+      }
+		}
+	}
+	,info: function(message, sticky) {
+		if (message) {
+			if (!sticky) {sticky = false;}
+			$.jGrowl(message, {theme: 'af-message-info', sticky: sticky});
+		}
+	}
+	,close: function() {
+		$.jGrowl('close');
+	}
 };
